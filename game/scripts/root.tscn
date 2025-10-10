@@ -1,0 +1,267 @@
+[gd_scene load_steps=19 format=3 uid="uid://6qvhtwrmq5xn"]
+
+[ext_resource type="Script" uid="uid://bxhdr4n27yc02" path="res://root.gd" id="1_h78s3"]
+[ext_resource type="PackedScene" uid="uid://c4w8vuna37lkx" path="res://board.glb" id="2_wxhua"]
+[ext_resource type="Script" uid="uid://ryo7pp6ayx2w" path="res://scripts/camera_dolly.gd" id="3_htkax"]
+[ext_resource type="FontFile" uid="uid://c7hd5o38jyyvc" path="res://assets/fonts/Jacquard12-Regular.ttf" id="4_kaevx"]
+[ext_resource type="Script" uid="uid://ob0ao55rm8qa" path="res://scripts/menu.gd" id="5_wxhua"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pyidc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vvh5c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvh5c"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28aoi"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jnlp7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8v81"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyht1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_vvh5c"]
+default_font = ExtResource("4_kaevx")
+default_font_size = 32
+All/font_sizes/FontSize = 32
+All/fonts/Font = ExtResource("4_kaevx")
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 64
+Button/fonts/font = ExtResource("4_kaevx")
+Button/styles/disabled = SubResource("StyleBoxFlat_vvh5c")
+Button/styles/focus = SubResource("StyleBoxFlat_28aoi")
+Button/styles/hover = SubResource("StyleBoxFlat_jnlp7")
+Button/styles/normal = SubResource("StyleBoxFlat_l8v81")
+Button/styles/pressed = SubResource("StyleBoxFlat_vyht1")
+
+[sub_resource type="LabelSettings" id="LabelSettings_28aoi"]
+font = ExtResource("4_kaevx")
+font_size = 160
+
+[sub_resource type="Animation" id="Animation_bf3um"]
+resource_name = "BobTitle"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -10), Vector2(0, 10)]
+}
+
+[sub_resource type="Animation" id="Animation_huihk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tw3kd"]
+_data = {
+&"BobTitle": SubResource("Animation_bf3um"),
+&"RESET": SubResource("Animation_huihk")
+}
+
+[sub_resource type="Environment" id="Environment_h78s3"]
+background_energy_multiplier = 0.0
+ambient_light_energy = 0.0
+glow_enabled = true
+glow_bloom = 1.0
+glow_hdr_threshold = 0.68
+fog_light_color = Color(0, 0, 0, 1)
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_h78s3")
+
+[node name="Board" parent="." instance=ExtResource("2_wxhua")]
+
+[node name="CameraDolly" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
+script = ExtResource("3_htkax")
+idle_horizontal_rotation_speed = 0.5
+is_active = false
+
+[node name="Arm" type="Node3D" parent="CameraDolly"]
+transform = Transform3D(1, 0, 0, 0, 0.86602527, 0.49999994, 0, -0.49999994, 0.86602527, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraDolly/Arm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
+fov = 30.0
+
+[node name="Piece" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Piece"]
+mesh = SubResource("CapsuleMesh_pyidc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Piece"]
+shape = SubResource("CapsuleShape3D_vvh5c")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.392191, 0)
+omni_range = 12.717258
+
+[node name="MenuUi" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_vvh5c")
+script = ExtResource("5_wxhua")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuUi"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -50.5
+offset_right = 67.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vsCpu" type="Button" parent="MenuUi/VBoxContainer"]
+layout_mode = 2
+text = "vs CPU"
+
+[node name="MatchMaking" type="Button" parent="MenuUi/VBoxContainer"]
+layout_mode = 2
+text = "Match Making"
+
+[node name="InviteOpponent" type="Button" parent="MenuUi/VBoxContainer"]
+layout_mode = 2
+text = "Invite Opponent"
+
+[node name="Control" type="MarginContainer" parent="MenuUi"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 181.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 20
+
+[node name="Title" type="Label" parent="MenuUi/Control"]
+layout_mode = 2
+text = "Haunted Chess"
+label_settings = SubResource("LabelSettings_28aoi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuUi/Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_tw3kd")
+}
+autoplay = "BobTitle"
+
+[node name="MadeBy" type="LinkButton" parent="MenuUi"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -162.0
+offset_top = -33.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "made by chicory.games"
+uri = "https://chicory.games"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h78s3")
