@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpgsddkebjyau"]
+
+[ext_resource type="Script" uid="uid://dwn7f0omyb8r" path="res://scripts/piece.gd" id="1_cuhp4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pyidc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vvh5c"]
+
+[node name="Pawn" type="StaticBody3D"]
+script = ExtResource("1_cuhp4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_pyidc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_vvh5c")

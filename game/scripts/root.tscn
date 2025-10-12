@@ -3,111 +3,11 @@
 [ext_resource type="Script" uid="uid://bxhdr4n27yc02" path="res://root.gd" id="1_h78s3"]
 [ext_resource type="PackedScene" uid="uid://c4w8vuna37lkx" path="res://board.glb" id="2_wxhua"]
 [ext_resource type="Script" uid="uid://ryo7pp6ayx2w" path="res://scripts/camera_dolly.gd" id="3_htkax"]
+[ext_resource type="PackedScene" uid="uid://dpgsddkebjyau" path="res://pieces/pawn.tscn" id="4_f0fmn"]
+[ext_resource type="Theme" uid="uid://bd5bff3aockur" path="res://theme.tres" id="4_htkax"]
 [ext_resource type="FontFile" uid="uid://c7hd5o38jyyvc" path="res://assets/fonts/Jacquard12-Regular.ttf" id="4_kaevx"]
 [ext_resource type="Script" uid="uid://ob0ao55rm8qa" path="res://scripts/menu.gd" id="5_wxhua"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pyidc"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vvh5c"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvh5c"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.3)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28aoi"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.75)
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jnlp7"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.225, 0.225, 0.225, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8v81"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyht1"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0, 0, 0, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="Theme" id="Theme_vvh5c"]
-default_font = ExtResource("4_kaevx")
-default_font_size = 32
-All/font_sizes/FontSize = 32
-All/fonts/Font = ExtResource("4_kaevx")
-Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
-Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
-Button/colors/icon_focus_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/icon_normal_color = Color(1, 1, 1, 1)
-Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
-Button/constants/align_to_largest_stylebox = 0
-Button/constants/h_separation = 4
-Button/constants/icon_max_width = 0
-Button/constants/outline_size = 0
-Button/font_sizes/font_size = 64
-Button/fonts/font = ExtResource("4_kaevx")
-Button/styles/disabled = SubResource("StyleBoxFlat_vvh5c")
-Button/styles/focus = SubResource("StyleBoxFlat_28aoi")
-Button/styles/hover = SubResource("StyleBoxFlat_jnlp7")
-Button/styles/normal = SubResource("StyleBoxFlat_l8v81")
-Button/styles/pressed = SubResource("StyleBoxFlat_vyht1")
+[ext_resource type="Texture2D" uid="uid://c54cwvbw53kw1" path="res://assets/flames.png" id="8_f0fmn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_28aoi"]
 font = ExtResource("4_kaevx")
@@ -158,8 +58,68 @@ glow_bloom = 1.0
 glow_hdr_threshold = 0.68
 fog_light_color = Color(0, 0, 0, 1)
 
-[node name="Root" type="Node3D"]
+[sub_resource type="Animation" id="Animation_dc7hx"]
+resource_name = "rotate_flames"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f0fmn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aa0gd"]
+_data = {
+&"RESET": SubResource("Animation_f0fmn"),
+&"rotate_flames": SubResource("Animation_dc7hx")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pvyh"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("8_f0fmn")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_texture = ExtResource("8_f0fmn")
+
+[sub_resource type="QuadMesh" id="QuadMesh_p0chx"]
+material = SubResource("StandardMaterial3D_5pvyh")
+
+[node name="Root" type="Node3D" node_paths=PackedStringArray("main_menu", "camera_dolly", "camera", "overlay_panel", "pieces_container", "highlighter")]
 script = ExtResource("1_h78s3")
+main_menu = NodePath("MainMenuUi")
+camera_dolly = NodePath("CameraDolly")
+camera = NodePath("CameraDolly/Arm/Camera3D")
+overlay_panel = NodePath("OverlayUI/Panel")
+piece_scenes = Dictionary[int, PackedScene]({
+0: ExtResource("4_f0fmn")
+})
+pieces_container = NodePath("AllPieces")
+highlighter = NodePath("PieceHighlight")
+
+[node name="AllPieces" type="Node3D" parent="."]
 
 [node name="Board" parent="." instance=ExtResource("2_wxhua")]
 
@@ -176,30 +136,55 @@ transform = Transform3D(1, 0, 0, 0, 0.86602527, 0.49999994, 0, -0.49999994, 0.86
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
 fov = 30.0
 
-[node name="Piece" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Piece"]
-mesh = SubResource("CapsuleMesh_pyidc")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Piece"]
-shape = SubResource("CapsuleShape3D_vvh5c")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.392191, 0)
 omni_range = 12.717258
 
-[node name="MenuUi" type="Control" parent="."]
+[node name="OverlayUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_vvh5c")
+theme = ExtResource("4_htkax")
+
+[node name="Panel" type="Panel" parent="OverlayUI"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 70.0
+offset_right = 351.0
+offset_bottom = 288.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OverlayUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Name" type="Label" parent="OverlayUI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "King"
+
+[node name="Text" type="Label" parent="OverlayUI/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Lorem ipsum dolor sit ametj kfldsjalkdjafda"
+autowrap_mode = 3
+
+[node name="MainMenuUi" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_htkax")
 script = ExtResource("5_wxhua")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuUi"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuUi"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -215,19 +200,19 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="vsCpu" type="Button" parent="MenuUi/VBoxContainer"]
+[node name="vsCpu" type="Button" parent="MainMenuUi/VBoxContainer"]
 layout_mode = 2
 text = "vs CPU"
 
-[node name="MatchMaking" type="Button" parent="MenuUi/VBoxContainer"]
+[node name="MatchMaking" type="Button" parent="MainMenuUi/VBoxContainer"]
 layout_mode = 2
 text = "Match Making"
 
-[node name="InviteOpponent" type="Button" parent="MenuUi/VBoxContainer"]
+[node name="InviteOpponent" type="Button" parent="MainMenuUi/VBoxContainer"]
 layout_mode = 2
 text = "Invite Opponent"
 
-[node name="Control" type="MarginContainer" parent="MenuUi"]
+[node name="Control" type="MarginContainer" parent="MainMenuUi"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -236,20 +221,20 @@ grow_horizontal = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 20
 
-[node name="Title" type="Label" parent="MenuUi/Control"]
+[node name="Title" type="Label" parent="MainMenuUi/Control"]
 layout_mode = 2
 text = "Haunted Chess"
 label_settings = SubResource("LabelSettings_28aoi")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuUi/Control"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuUi/Control"]
 libraries = {
 &"": SubResource("AnimationLibrary_tw3kd")
 }
 autoplay = "BobTitle"
 
-[node name="MadeBy" type="LinkButton" parent="MenuUi"]
+[node name="MadeBy" type="LinkButton" parent="MainMenuUi"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -265,3 +250,96 @@ uri = "https://chicory.games"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h78s3")
+
+[node name="PieceHighlight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1)
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PieceHighlight"]
+libraries = {
+&"": SubResource("AnimationLibrary_aa0gd")
+}
+autoplay = "rotate_flames"
+
+[node name="Node3D" type="Node3D" parent="PieceHighlight"]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(-0.99999994, 0, 0, 0, 0.70710677, -0.70710677, 0, -0.7071067, -0.7071067, 0, -0.53416383, -1)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(-0.7071067, 0.4999999, 0.49999994, 0, 0.7071067, -0.7071067, -0.7071067, -0.49999994, -0.4999999, 0.70710635, -0.53416383, -0.7071065)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(-0.7071067, 0, 0.70710653, 0, 0.9999999, 0, -0.7071067, 0, -0.70710665, 0.49349093, -0.29870093, -0.49349105)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(-0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, -0.9999999, 0, -0.29870087, -0.69790184)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, -0.53416383, 1)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -0.29870087, 0.6979019)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(-4.371139e-08, 0.70710677, 0.70710677, 0, 0.70710677, -0.70710677, -1, -3.090862e-08, -3.090862e-08, 1, -0.53416383, 0)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(0.7071068, -0.49999994, -0.49999994, 0, 0.70710677, -0.70710677, 0.7071067, 0.5, 0.5, -0.7071067, -0.53416383, 0.7071068)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(0.7071068, 0, -0.70710665, 0, 0.99999994, 0, 0.7071067, 0, 0.70710677, -0.4934911, -0.29870087, 0.49349117)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(-4.371139e-08, 0, 0.99999994, 0, 0.99999994, 0, -1, 0, -4.3711385e-08, 0.69790196, -0.29870087, 0)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(0.7071067, 0.5, 0.5, 0, 0.70710677, -0.70710677, -0.7071068, 0.49999994, 0.49999994, 0.7071068, -0.53416383, 0.7071067)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(0.7071067, 0, 0.70710677, 0, 0.99999994, 0, -0.7071068, 0, 0.70710665, 0.49349117, -0.29870087, 0.4934911)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(-0.70710677, -0.49999997, -0.49999997, 0, 0.70710677, -0.70710677, 0.70710677, -0.49999997, -0.49999997, -0.70710677, -0.53416383, -0.7071068)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(5.9604645e-08, -0.7071067, -0.7071067, 0, 0.70710677, -0.70710677, 0.99999994, 4.2146848e-08, 4.2146848e-08, -0.99999994, -0.53416383, 5.9604645e-08)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(5.9604645e-08, 0, -0.9999999, 0, 0.99999994, 0, 0.99999994, 0, 5.960464e-08, -0.69790184, -0.29870087, 5.9604645e-08)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="PieceHighlight/Node3D"]
+transform = Transform3D(-0.70710677, 0, -0.7071067, 0, 0.99999994, 0, 0.70710677, 0, -0.7071067, -0.49349117, -0.29870087, -0.49349117)
+mesh = SubResource("QuadMesh_p0chx")
+skeleton = NodePath("../..")
