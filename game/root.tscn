@@ -1,16 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://6qvhtwrmq5xn"]
+[gd_scene load_steps=23 format=3 uid="uid://6qvhtwrmq5xn"]
 
-[ext_resource type="Script" uid="uid://bxhdr4n27yc02" path="res://root.gd" id="1_h78s3"]
-[ext_resource type="PackedScene" uid="uid://c4w8vuna37lkx" path="res://board.glb" id="2_wxhua"]
-[ext_resource type="Script" uid="uid://ryo7pp6ayx2w" path="res://scripts/camera_dolly.gd" id="3_htkax"]
-[ext_resource type="PackedScene" uid="uid://dpgsddkebjyau" path="res://pieces/pawn.tscn" id="4_f0fmn"]
-[ext_resource type="Theme" uid="uid://bd5bff3aockur" path="res://theme.tres" id="4_htkax"]
-[ext_resource type="FontFile" uid="uid://c7hd5o38jyyvc" path="res://assets/fonts/Jacquard12-Regular.ttf" id="4_kaevx"]
-[ext_resource type="Script" uid="uid://ob0ao55rm8qa" path="res://scripts/menu.gd" id="5_wxhua"]
-[ext_resource type="Texture2D" uid="uid://c54cwvbw53kw1" path="res://assets/flames.png" id="8_f0fmn"]
+[ext_resource type="Script" uid="uid://bxhdr4n27yc02" path="res://scripts/root.gd" id="1_huihk"]
+[ext_resource type="PackedScene" uid="uid://dpgsddkebjyau" path="res://pieces/pawn.tscn" id="2_tw3kd"]
+[ext_resource type="PackedScene" uid="uid://c4w8vuna37lkx" path="res://assets/board.glb" id="3_gd4vy"]
+[ext_resource type="Script" uid="uid://ryo7pp6ayx2w" path="res://scripts/camera_dolly.gd" id="4_qw60f"]
+[ext_resource type="Theme" uid="uid://bd5bff3aockur" path="res://theme.tres" id="5_eji0w"]
+[ext_resource type="Script" uid="uid://ob0ao55rm8qa" path="res://scripts/menu.gd" id="6_qwhpj"]
+[ext_resource type="FontFile" uid="uid://c7hd5o38jyyvc" path="res://assets/fonts/Jacquard12-Regular.ttf" id="7_qt76e"]
+[ext_resource type="Texture2D" uid="uid://c54cwvbw53kw1" path="res://assets/flames.png" id="8_sq7yr"]
+[ext_resource type="PackedScene" uid="uid://ckwmjn8e11pfx" path="res://assets/arrow.glb" id="9_r3r3k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_28aoi"]
-font = ExtResource("4_kaevx")
+font = ExtResource("7_qt76e")
 font_size = 160
 
 [sub_resource type="Animation" id="Animation_bf3um"]
@@ -58,6 +59,21 @@ glow_bloom = 1.0
 glow_hdr_threshold = 0.68
 fog_light_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_f0fmn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_dc7hx"]
 resource_name = "rotate_flames"
 length = 8.0
@@ -75,21 +91,6 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_f0fmn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aa0gd"]
 _data = {
 &"RESET": SubResource("Animation_f0fmn"),
@@ -99,33 +100,95 @@ _data = {
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pvyh"]
 transparency = 1
 cull_mode = 2
-albedo_texture = ExtResource("8_f0fmn")
+albedo_texture = ExtResource("8_sq7yr")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_texture = ExtResource("8_f0fmn")
+emission_texture = ExtResource("8_sq7yr")
 
 [sub_resource type="QuadMesh" id="QuadMesh_p0chx"]
 material = SubResource("StandardMaterial3D_5pvyh")
 
+[sub_resource type="Animation" id="Animation_tw3kd"]
+resource_name = "rotate_arrow"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arrow:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 6, 0), Vector3(0, 7, 0), Vector3(0, 6, 0), Vector3(0, 7, 0), Vector3(0, 6, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gd4vy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arrow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 6, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gd4vy"]
+_data = {
+&"RESET": SubResource("Animation_gd4vy"),
+&"rotate_arrow": SubResource("Animation_tw3kd")
+}
+
 [node name="Root" type="Node3D" node_paths=PackedStringArray("main_menu", "camera_dolly", "camera", "overlay_panel", "pieces_container", "highlighter")]
-script = ExtResource("1_h78s3")
+script = ExtResource("1_huihk")
 main_menu = NodePath("MainMenuUi")
 camera_dolly = NodePath("CameraDolly")
 camera = NodePath("CameraDolly/Arm/Camera3D")
 overlay_panel = NodePath("OverlayUI/Panel")
 piece_scenes = Dictionary[int, PackedScene]({
-0: ExtResource("4_f0fmn")
+0: ExtResource("2_tw3kd")
 })
 pieces_container = NodePath("AllPieces")
 highlighter = NodePath("PieceHighlight")
 
 [node name="AllPieces" type="Node3D" parent="."]
 
-[node name="Board" parent="." instance=ExtResource("2_wxhua")]
+[node name="Board" parent="." instance=ExtResource("3_gd4vy")]
 
 [node name="CameraDolly" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
-script = ExtResource("3_htkax")
+script = ExtResource("4_qw60f")
 idle_horizontal_rotation_speed = 0.5
 is_active = false
 
@@ -147,7 +210,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_htkax")
+theme = ExtResource("5_eji0w")
 
 [node name="Panel" type="Panel" parent="OverlayUI"]
 layout_mode = 0
@@ -181,8 +244,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_htkax")
-script = ExtResource("5_wxhua")
+theme = ExtResource("5_eji0w")
+script = ExtResource("6_qwhpj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenuUi"]
 layout_mode = 1
@@ -343,3 +406,15 @@ skeleton = NodePath("../../..")
 transform = Transform3D(-0.70710677, 0, -0.7071067, 0, 0.99999994, 0, 0.70710677, 0, -0.7071067, -0.49349117, -0.29870087, -0.49349117)
 mesh = SubResource("QuadMesh_p0chx")
 skeleton = NodePath("../..")
+
+[node name="ArrowMarker" type="Node3D" parent="."]
+visible = false
+
+[node name="Arrow" parent="ArrowMarker" instance=ExtResource("9_r3r3k")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 6, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ArrowMarker"]
+libraries = {
+&"": SubResource("AnimationLibrary_gd4vy")
+}
+autoplay = "rotate_arrow"

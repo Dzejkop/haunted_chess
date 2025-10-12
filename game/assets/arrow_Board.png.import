@@ -2,11 +2,10 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhwx6ydpbl423"
-path.s3tc="res://.godot/imported/board_Board.png-1610610459406abfcddfdf3005c3f0cf.s3tc.ctex"
+uid="uid://dotom1ajd2ay3"
+path="res://.godot/imported/arrow_Board.png-6b65ce2736293347be1ba899b6af633a.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "a430615159d378efa0ac10d038012b95"
@@ -14,12 +13,12 @@ generator_parameters={
 
 [deps]
 
-source_file="res://board_Board.png"
-dest_files=["res://.godot/imported/board_Board.png-1610610459406abfcddfdf3005c3f0cf.s3tc.ctex"]
+source_file="res://assets/arrow_Board.png"
+dest_files=["res://.godot/imported/arrow_Board.png-6b65ce2736293347be1ba899b6af633a.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -41,4 +40,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
