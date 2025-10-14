@@ -42,32 +42,52 @@ func _ready():
 func start_game():
 	camera_dolly.is_active = true
 	turn_counter = 0
+	
+	var white_player := Piece.Player.White
+	var black_player := Piece.Player.Black
 
 	# Spawn player pawns
 	for i in range(8):
-		spawn_piece(Piece.Kind.PAWN, Vector2i(i, 1))
+		spawn_piece(Piece.Kind.PAWN, Vector2i(i, 1), white_player)
 	
 	# Spawn other pieces
-	spawn_piece(Piece.Kind.KING, Vector2i(3, 0))
-	spawn_piece(Piece.Kind.QUEEN, Vector2i(4, 0))
+	spawn_piece(Piece.Kind.KING, Vector2i(3, 0), white_player)
+	spawn_piece(Piece.Kind.QUEEN, Vector2i(4, 0), white_player)
 	
-	spawn_piece(Piece.Kind.TOWER, Vector2i(0, 0))
-	spawn_piece(Piece.Kind.TOWER, Vector2i(7, 0))
+	spawn_piece(Piece.Kind.TOWER, Vector2i(0, 0), white_player)
+	spawn_piece(Piece.Kind.TOWER, Vector2i(7, 0), white_player)
 	
-	spawn_piece(Piece.Kind.KNIGHT, Vector2i(1, 0))
-	spawn_piece(Piece.Kind.KNIGHT, Vector2i(6, 0))
+	spawn_piece(Piece.Kind.KNIGHT, Vector2i(1, 0), white_player)
+	spawn_piece(Piece.Kind.KNIGHT, Vector2i(6, 0), white_player)
 	
-	spawn_piece(Piece.Kind.ROOK, Vector2i(2, 0))
-	spawn_piece(Piece.Kind.ROOK, Vector2i(5, 0))
+	spawn_piece(Piece.Kind.ROOK, Vector2i(2, 0), white_player)
+	spawn_piece(Piece.Kind.ROOK, Vector2i(5, 0), white_player)
 
-func spawn_piece(kind: Piece.Kind, board_pos: Vector2i):
+	# Spawn player pawns
+	for i in range(8):
+		spawn_piece(Piece.Kind.PAWN, Vector2i(i, 6), black_player)
+	
+	# Spawn other pieces
+	spawn_piece(Piece.Kind.KING, Vector2i(3, 7), black_player)
+	spawn_piece(Piece.Kind.QUEEN, Vector2i(4, 7), black_player)
+	
+	spawn_piece(Piece.Kind.TOWER, Vector2i(0, 7), black_player)
+	spawn_piece(Piece.Kind.TOWER, Vector2i(7, 7), black_player)
+	
+	spawn_piece(Piece.Kind.KNIGHT, Vector2i(1, 7), black_player)
+	spawn_piece(Piece.Kind.KNIGHT, Vector2i(6, 7), black_player)
+	
+	spawn_piece(Piece.Kind.ROOK, Vector2i(2, 7), black_player)
+	spawn_piece(Piece.Kind.ROOK, Vector2i(5, 7), black_player)
+
+func spawn_piece(kind: Piece.Kind, board_pos: Vector2i, player: Piece.Player):
 		var piece_scn := piece_scenes[kind]
 
 		var new_piece: Piece = piece_scn.instantiate()
 		pieces_container.add_child(new_piece)
 		var p := board2world3(board_pos)
 		new_piece.global_position = p
-		new_piece.init(Piece.Player.White, board_pos)
+		new_piece.init(player, board_pos)
 		all_pieces.append(new_piece)
 
 func which_player_turn() -> Piece.Player:
@@ -90,11 +110,17 @@ func _process(_delta):
 	for marker in move_markers:
 		marker.set_highlight(false)
 
+	unselect()
 	pick_a_piece()
 	update_highlighter()
 	
 	if should_spawn_legal_moves:
 		spawn_legal_moves()
+
+func unselect():
+	if Input.is_action_just_released("ui_cancel") or Input.is_action_just_released("deselect"):
+		selected_piece = null
+		despawn_markers()
 
 func pick_a_piece():
 	var mouse_pos := get_viewport().get_mouse_position()

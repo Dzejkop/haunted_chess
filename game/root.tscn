@@ -133,10 +133,12 @@ move_marker_scn = ExtResource("3_huihk")
 
 [node name="Board" parent="." instance=ExtResource("3_gd4vy")]
 
-[node name="CameraDolly" type="Node3D" parent="."]
+[node name="CameraDolly" type="Node3D" parent="." node_paths=PackedStringArray("arm", "camera")]
 transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
 script = ExtResource("4_qw60f")
 idle_horizontal_rotation_speed = 0.5
+arm = NodePath("Arm")
+camera = NodePath("Arm/Camera3D")
 is_active = false
 
 [node name="Arm" type="Node3D" parent="CameraDolly"]
