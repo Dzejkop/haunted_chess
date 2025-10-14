@@ -44,8 +44,8 @@ func start_game():
 	turn_counter = 0
 
 	# Spawn player pawns
-	#for i in range(8):
-		#spawn_piece(Piece.Kind.PAWN, Vector2i(i, 1))
+	for i in range(8):
+		spawn_piece(Piece.Kind.PAWN, Vector2i(i, 1))
 	
 	# Spawn other pieces
 	spawn_piece(Piece.Kind.KING, Vector2i(3, 0))
