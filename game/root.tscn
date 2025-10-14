@@ -1,13 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://6qvhtwrmq5xn"]
+[gd_scene load_steps=24 format=3 uid="uid://6qvhtwrmq5xn"]
 
 [ext_resource type="Script" uid="uid://bxhdr4n27yc02" path="res://scripts/root.gd" id="1_huihk"]
 [ext_resource type="PackedScene" uid="uid://dpgsddkebjyau" path="res://pieces/pawn.tscn" id="2_tw3kd"]
 [ext_resource type="PackedScene" uid="uid://c4w8vuna37lkx" path="res://assets/board.glb" id="3_gd4vy"]
 [ext_resource type="PackedScene" uid="uid://5xkx5ht73y67" path="res://move_marker.tscn" id="3_huihk"]
 [ext_resource type="PackedScene" uid="uid://bumvlb03j84me" path="res://pieces/king.tscn" id="3_tw3kd"]
+[ext_resource type="PackedScene" uid="uid://bvse4dhyronry" path="res://pieces/queen.tscn" id="4_eji0w"]
 [ext_resource type="Script" uid="uid://ryo7pp6ayx2w" path="res://scripts/camera_dolly.gd" id="4_qw60f"]
 [ext_resource type="Theme" uid="uid://bd5bff3aockur" path="res://theme.tres" id="5_eji0w"]
+[ext_resource type="PackedScene" uid="uid://nq3hq8rdlyo8" path="res://pieces/knight.tscn" id="5_qwhpj"]
+[ext_resource type="PackedScene" uid="uid://db7hmvr7ls6y4" path="res://pieces/rook.tscn" id="6_qt76e"]
 [ext_resource type="Script" uid="uid://ob0ao55rm8qa" path="res://scripts/menu.gd" id="6_qwhpj"]
+[ext_resource type="PackedScene" uid="uid://pxu1di6e3lb0" path="res://pieces/tower.tscn" id="7_sq7yr"]
 [ext_resource type="Texture2D" uid="uid://c54cwvbw53kw1" path="res://assets/flames.png" id="8_sq7yr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_28aoi"]
@@ -117,7 +121,11 @@ pieces_container = NodePath("AllPieces")
 highlighter = NodePath("PieceHighlight")
 piece_scenes = Dictionary[int, PackedScene]({
 0: ExtResource("2_tw3kd"),
-1: ExtResource("3_tw3kd")
+1: ExtResource("3_tw3kd"),
+2: ExtResource("4_eji0w"),
+3: ExtResource("5_qwhpj"),
+4: ExtResource("6_qt76e"),
+5: ExtResource("7_sq7yr")
 })
 move_marker_scn = ExtResource("3_huihk")
 

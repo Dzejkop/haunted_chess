@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bumvlb03j84me"]
+[gd_scene load_steps=6 format=3 uid="uid://bvse4dhyronry"]
 
-[ext_resource type="Script" uid="uid://dwn7f0omyb8r" path="res://scripts/piece.gd" id="1_v7vo4"]
+[ext_resource type="Script" uid="uid://dwn7f0omyb8r" path="res://scripts/piece.gd" id="1_shiw1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pyidc"]
 
@@ -8,12 +8,11 @@
 
 [sub_resource type="TorusMesh" id="TorusMesh_v7vo4"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_v7vo4"]
-size = Vector3(0.5, 1.5, 0.5)
+[sub_resource type="SphereMesh" id="SphereMesh_shiw1"]
 
-[node name="King" type="StaticBody3D"]
-script = ExtResource("1_v7vo4")
-kind = 1
+[node name="Queen" type="StaticBody3D"]
+script = ExtResource("1_shiw1")
+kind = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_pyidc")
@@ -26,9 +25,5 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.2661405, 0)
 mesh = SubResource("TorusMesh_v7vo4")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.6566632, 0)
-mesh = SubResource("BoxMesh_v7vo4")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0, 0.5, 0, 1.7532351, 0)
-mesh = SubResource("BoxMesh_v7vo4")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.434364, 0)
+mesh = SubResource("SphereMesh_shiw1")

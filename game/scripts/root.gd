@@ -44,11 +44,21 @@ func start_game():
 	turn_counter = 0
 
 	# Spawn player pawns
-	for i in range(8):
-		spawn_piece(Piece.Kind.PAWN, Vector2i(i, 1))
+	#for i in range(8):
+		#spawn_piece(Piece.Kind.PAWN, Vector2i(i, 1))
 	
-	# Spawn king
-	spawn_piece(Piece.Kind.KING, Vector2i(4, 0))
+	# Spawn other pieces
+	spawn_piece(Piece.Kind.KING, Vector2i(3, 0))
+	spawn_piece(Piece.Kind.QUEEN, Vector2i(4, 0))
+	
+	spawn_piece(Piece.Kind.TOWER, Vector2i(0, 0))
+	spawn_piece(Piece.Kind.TOWER, Vector2i(7, 0))
+	
+	spawn_piece(Piece.Kind.KNIGHT, Vector2i(1, 0))
+	spawn_piece(Piece.Kind.KNIGHT, Vector2i(6, 0))
+	
+	spawn_piece(Piece.Kind.ROOK, Vector2i(2, 0))
+	spawn_piece(Piece.Kind.ROOK, Vector2i(5, 0))
 
 func spawn_piece(kind: Piece.Kind, board_pos: Vector2i):
 		var piece_scn := piece_scenes[kind]
@@ -146,6 +156,14 @@ func spawn_legal_moves():
 		spawn_legal_pawn_moves()
 	if selected_piece.kind == Piece.Kind.KING:
 		spawn_legal_king_moves()
+	if selected_piece.kind == Piece.Kind.QUEEN:
+		spawn_legal_queen_moves()
+	if selected_piece.kind == Piece.Kind.TOWER:
+		spawn_legal_tower_moves()
+	if selected_piece.kind == Piece.Kind.KNIGHT:
+		spawn_legal_knight_moves()
+	if selected_piece.kind == Piece.Kind.ROOK:
+		spawn_legal_rook_moves()
 
 func despawn_markers():
 	for marker in move_markers:
@@ -159,9 +177,6 @@ func spawn_legal_pawn_moves():
 	spawn_legal_movement_move(selected_piece.board_pos + dir)
 
 func spawn_legal_king_moves():
-	if selected_piece.num_moves == 0:
-		pass
-		
 	for x in [-1, 0, 1]:
 		for y in [-1, 0, 1]:
 			if x == 0 and y == 0:
@@ -174,6 +189,72 @@ func spawn_legal_king_moves():
 			if is_occupied_by_piece_of(move_pos, selected_piece.player):
 				continue
 
+			spawn_legal_movement_move(move_pos)
+
+func spawn_legal_queen_moves():
+	var all_dirs = []
+	for x in [-1, 0, 1]:
+		for y in [-1, 0, 1]:
+			if x == 0 and y == 0:
+				continue
+			all_dirs.append(Vector2i(x, y))
+			
+	for dir in all_dirs:
+		for i in range(1, 8):
+			var move_pos = selected_piece.board_pos + dir * i
+			if not is_legal_pos(move_pos):
+				break
+			if is_occupied_by_piece_of(move_pos, selected_piece.player):
+				break
+			spawn_legal_movement_move(move_pos)
+
+func spawn_legal_tower_moves():
+	var all_dirs = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
+			
+	for dir in all_dirs:
+		for i in range(1, 8):
+			var move_pos = selected_piece.board_pos + dir * i
+			if not is_legal_pos(move_pos):
+				break
+			if is_occupied_by_piece_of(move_pos, selected_piece.player):
+				break
+			spawn_legal_movement_move(move_pos)
+
+func spawn_legal_knight_moves():
+	var all_dirs = [
+		Vector2i(2, 1),
+		Vector2i(2, -1),
+		Vector2i(1, 2),
+		Vector2i(1, -2),
+		Vector2i(-1, 2),
+		Vector2i(-1, -2),
+		Vector2i(-2, -1),
+		Vector2i(-2, 1),
+	]
+
+	for dir in all_dirs:
+		var move_pos = selected_piece.board_pos + dir
+		if not is_legal_pos(move_pos):
+			continue
+		if is_occupied_by_piece_of(move_pos, selected_piece.player):
+			continue
+		spawn_legal_movement_move(move_pos)
+			
+func spawn_legal_rook_moves():
+	var all_dirs = [
+		Vector2i(1, 1), 
+		Vector2i(1, -1), 
+		Vector2i(-1, -1), 
+		Vector2i(-1, 1)
+	]
+
+	for dir in all_dirs:
+		for i in range(1, 8):
+			var move_pos = selected_piece.board_pos + dir * i
+			if not is_legal_pos(move_pos):
+				break
+			if is_occupied_by_piece_of(move_pos, selected_piece.player):
+				break
 			spawn_legal_movement_move(move_pos)
 
 func spawn_legal_movement_move(pos: Vector2i):

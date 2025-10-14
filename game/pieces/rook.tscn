@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://db7hmvr7ls6y4"]
+
+[ext_resource type="Script" uid="uid://dwn7f0omyb8r" path="res://scripts/piece.gd" id="1_ib188"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pyidc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vvh5c"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ib188"]
+
+[node name="Rook" type="StaticBody3D"]
+script = ExtResource("1_ib188")
+kind = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 1, 0, 0, 0, 0.7, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_pyidc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_vvh5c")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.2661405, 0)
+mesh = SubResource("CapsuleMesh_ib188")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://nq3hq8rdlyo8"]
+
+[ext_resource type="Script" uid="uid://dwn7f0omyb8r" path="res://scripts/piece.gd" id="1_6p52s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pyidc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vvh5c"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_6p52s"]
+
+[node name="Knight" type="StaticBody3D"]
+script = ExtResource("1_6p52s")
+kind = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_pyidc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_vvh5c")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.34751523, 1.0014155, 0, -1.0014155, -0.34751523, 0, 0, 0, 1.06, 0.22914433, 1.0070099, 0)
+mesh = SubResource("PrismMesh_6p52s")

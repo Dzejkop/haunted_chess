@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://5xkx5ht73y67"]
+[gd_scene load_steps=6 format=3 uid="uid://5xkx5ht73y67"]
 
 [ext_resource type="Script" uid="uid://b0vsdvwribcuo" path="res://scripts/move_marker.gd" id="1_br57f"]
 [ext_resource type="PackedScene" uid="uid://bnombpwnd74dh" path="res://square_marker.tscn" id="2_blk23"]
-[ext_resource type="PackedScene" uid="uid://dey0eb5wdsuch" path="res://arrow_marker.tscn" id="3_4mdfn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tw3kd"]
 size = Vector3(2, 0.2, 2)
@@ -22,9 +21,6 @@ highlight = NodePath("Highlight")
 
 [node name="SquareMarker" parent="." instance=ExtResource("2_blk23")]
 transform = Transform3D(1, 0, 0, 0, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, -0.8527998, 0)
-
-[node name="ArrowMarker" parent="." instance=ExtResource("3_4mdfn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
