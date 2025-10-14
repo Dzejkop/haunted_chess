@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://5xkx5ht73y67"]
+
+[ext_resource type="Script" uid="uid://b0vsdvwribcuo" path="res://scripts/move_marker.gd" id="1_br57f"]
+[ext_resource type="PackedScene" uid="uid://bnombpwnd74dh" path="res://square_marker.tscn" id="2_blk23"]
+[ext_resource type="PackedScene" uid="uid://dey0eb5wdsuch" path="res://arrow_marker.tscn" id="3_4mdfn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tw3kd"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_br57f"]
+size = Vector3(2, 100, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blk23"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.28235295)
+emission_enabled = true
+emission = Color(1, 0, 0.04090023, 1)
+
+[node name="MoveMarker" type="Area3D" node_paths=PackedStringArray("highlight")]
+script = ExtResource("1_br57f")
+highlight = NodePath("Highlight")
+
+[node name="SquareMarker" parent="." instance=ExtResource("2_blk23")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, -0.8527998, 0)
+
+[node name="ArrowMarker" parent="." instance=ExtResource("3_4mdfn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05621767, 0)
+shape = SubResource("BoxShape3D_tw3kd")
+
+[node name="Highlight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_br57f")
+surface_material_override/0 = SubResource("StandardMaterial3D_blk23")

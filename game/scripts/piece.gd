@@ -17,8 +17,8 @@ enum Kind {
 }
 
 enum Player {
-	Local,
-	Remote
+	White,
+	Black
 }
 
 const KIND_NAME: Dictionary = {
@@ -28,17 +28,26 @@ const KIND_NAME: Dictionary = {
 @export
 var kind: Kind 
 
+## The position of this piece on the board
 var board_pos: Vector2i = Vector2i.ZERO
+
+## How many times this piece moves
+var num_moves: int = 0
 
 var player
 
 func init(player_value: Player, board_pos_value: Vector2i):
 	self.player = player_value
 	self.board_pos = board_pos_value
+	
+func player_dir() -> Vector2i:
+	if player == Player.White:
+		return Vector2i(0, 1)
+	else:
+		return Vector2i(0, -1)
 
 func get_piece_name():
 	return KIND_NAME[kind]
-	
 
 func get_legal_moves():
 	pass

@@ -13,21 +13,28 @@ var camera: Camera3D
 var overlay_panel: Control
 
 @export
-var piece_scenes: Dictionary[Piece.Kind, PackedScene]
-
-@export
 var pieces_container: Node3D
 
 @export
 var highlighter: Node3D
+
+@export_category("Packed scenes")
+@export
+var piece_scenes: Dictionary[Piece.Kind, PackedScene]
+@export
+var move_marker_scn: PackedScene
+
+# ---- State Variables ----
 
 var selected_piece: Piece
 var should_spawn_legal_moves: bool = false
 
 var all_pieces: Array[Piece] = []
 
+var move_markers: Array[MoveMarker] = []
+
 var turn_counter: int = 0
-var local_player_starts: bool = true
+var local_player: Piece.Player = Piece.Player.White
 
 func _ready():
 	main_menu.connect("start_game", start_game)
@@ -42,24 +49,19 @@ func start_game():
 	for i in range(8):
 		var new_piece: Piece = pawn_scn.instantiate()
 		pieces_container.add_child(new_piece)
-		var x := -7.0 + i * 2.0
-		var z := 5.0
-		new_piece.global_position = Vector3(x, 1.0, z)
+		#var x := -7.0 + i * 2.0
+		#var z := 5.0
 		var board_pos = Vector2i(i, 1)
-		new_piece.init(Piece.Player.Local, board_pos)
+		var p := board2world3(board_pos)
+		new_piece.global_position = p
+		new_piece.init(Piece.Player.White, board_pos)
 		all_pieces.append(new_piece)
 		
 func which_player_turn() -> Piece.Player:
 	if turn_counter % 2 == 0:
-		if local_player_starts:
-			return Piece.Player.Local
-		else:
-			return Piece.Player.Remote
+		return Piece.Player.White
 	else:
-		if local_player_starts:
-			return Piece.Player.Remote
-		else:
-			return Piece.Player.Local
+		return Piece.Player.Black
 
 func find_piece_at(x: int, y: int) -> Piece:
 	for piece in all_pieces:
@@ -70,6 +72,10 @@ func find_piece_at(x: int, y: int) -> Piece:
 
 func _process(_delta):
 	overlay_panel.visible = false
+	should_spawn_legal_moves = false
+	
+	for marker in move_markers:
+		marker.set_highlight(false)
 
 	pick_a_piece()
 	update_highlighter()
@@ -87,22 +93,41 @@ func pick_a_piece():
 	var space_state = PhysicsServer3D.space_get_direct_state(space_rid)
 	
 	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.collide_with_areas = true
 	var result = space_state.intersect_ray(query)
 
 	if not result.is_empty():
-		overlay_panel.visible = true
-		var label: Label = overlay_panel.get_node("VBoxContainer/Text")
-		label.text = str(result.position)
+		if result.collider is Piece:
+			overlay_panel.visible = true
+			var label: Label = overlay_panel.get_node("VBoxContainer/Text")
+			label.text = str(result.position)
 		
-		var piece: Piece = result.collider
-		var label_name: Label = overlay_panel.get_node("VBoxContainer/Name")
-		label_name.text = piece.get_piece_name()
-		
-		overlay_panel.position = mouse_pos
-		
-		if selected_piece != piece && Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			selected_piece = piece
-			should_spawn_legal_moves = true
+			var piece: Piece = result.collider
+			var label_name: Label = overlay_panel.get_node("VBoxContainer/Name")
+			label_name.text = piece.get_piece_name()
+			
+			overlay_panel.position = mouse_pos
+			
+			if selected_piece != piece && Input.is_action_just_released("move"):
+				selected_piece = piece
+				should_spawn_legal_moves = true
+		elif result.collider is MoveMarker:
+			result.collider.set_highlight(true)
+
+			if Input.is_action_just_released("move"):
+				execute_move(result.collider)
+		else:
+			print("unknown item")
+			
+func execute_move(marker: MoveMarker):
+	turn_counter += 1
+	selected_piece.num_moves += 1
+	
+	selected_piece.board_pos = marker.target_pos
+	selected_piece.global_position = board2world3(selected_piece.board_pos)
+	
+	selected_piece = null
+	despawn_markers()
 
 func update_highlighter():
 	if not selected_piece:
@@ -113,8 +138,33 @@ func update_highlighter():
 	highlighter.global_position = selected_piece.global_position
 
 func spawn_legal_moves():
+	despawn_markers()
 	if selected_piece.kind == Piece.Kind.PAWN:
 		spawn_legal_pawn_moves()
 
+func despawn_markers():
+	for marker in move_markers:
+		marker.queue_free()
+	move_markers = []
+
 func spawn_legal_pawn_moves():
-	pass
+	var dir := selected_piece.player_dir()
+	if selected_piece.num_moves == 0:
+		spawn_legal_movement_move(selected_piece.board_pos + dir * 2)
+	spawn_legal_movement_move(selected_piece.board_pos + dir)
+
+func spawn_legal_movement_move(pos: Vector2i):
+	var arrow_marker: MoveMarker = move_marker_scn.instantiate()
+	add_child(arrow_marker)
+	
+	arrow_marker.global_position = board2world3(pos)
+	arrow_marker.target_pos = pos
+	
+	move_markers.append(arrow_marker)
+
+func board2world(pos: Vector2i) -> Vector2:
+	return Vector2(-7.0 + pos.x * 2.0, -7.0 + pos.y * 2.0)
+	
+func board2world3(pos: Vector2i) -> Vector3:
+	var p := board2world(pos)
+	return Vector3(p.x, 1.0, p.y)

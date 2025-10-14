@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnombpwnd74dh"]
+
+[ext_resource type="PackedScene" uid="uid://bljumysx1bi0j" path="res://assets/marker.glb" id="1_o4gs6"]
+
+[node name="SquareMarker" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
+
+[node name="SquareMarkerIdk" parent="." instance=ExtResource("1_o4gs6")]
