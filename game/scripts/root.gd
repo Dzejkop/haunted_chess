@@ -42,30 +42,33 @@ func _ready():
 func start_game():
 	camera_dolly.is_active = true
 	turn_counter = 0
-	
-	var pawn_scn := piece_scenes[Piece.Kind.PAWN]
 
 	# Spawn player pawns
 	for i in range(8):
-		var new_piece: Piece = pawn_scn.instantiate()
+		spawn_piece(Piece.Kind.PAWN, Vector2i(i, 1))
+	
+	# Spawn king
+	spawn_piece(Piece.Kind.KING, Vector2i(4, 0))
+
+func spawn_piece(kind: Piece.Kind, board_pos: Vector2i):
+		var piece_scn := piece_scenes[kind]
+
+		var new_piece: Piece = piece_scn.instantiate()
 		pieces_container.add_child(new_piece)
-		#var x := -7.0 + i * 2.0
-		#var z := 5.0
-		var board_pos = Vector2i(i, 1)
 		var p := board2world3(board_pos)
 		new_piece.global_position = p
 		new_piece.init(Piece.Player.White, board_pos)
 		all_pieces.append(new_piece)
-		
+
 func which_player_turn() -> Piece.Player:
 	if turn_counter % 2 == 0:
 		return Piece.Player.White
 	else:
 		return Piece.Player.Black
 
-func find_piece_at(x: int, y: int) -> Piece:
+func find_piece_at(pos: Vector2i) -> Piece:
 	for piece in all_pieces:
-		if piece.board_pos.x == x && piece.board_pos.y == y:
+		if piece.board_pos.x == pos.x && piece.board_pos.y == pos.y:
 			return piece
 
 	return null
@@ -141,6 +144,8 @@ func spawn_legal_moves():
 	despawn_markers()
 	if selected_piece.kind == Piece.Kind.PAWN:
 		spawn_legal_pawn_moves()
+	if selected_piece.kind == Piece.Kind.KING:
+		spawn_legal_king_moves()
 
 func despawn_markers():
 	for marker in move_markers:
@@ -152,6 +157,24 @@ func spawn_legal_pawn_moves():
 	if selected_piece.num_moves == 0:
 		spawn_legal_movement_move(selected_piece.board_pos + dir * 2)
 	spawn_legal_movement_move(selected_piece.board_pos + dir)
+
+func spawn_legal_king_moves():
+	if selected_piece.num_moves == 0:
+		pass
+		
+	for x in [-1, 0, 1]:
+		for y in [-1, 0, 1]:
+			if x == 0 and y == 0:
+				continue
+				
+			var move_pos = Vector2i(x, y) + selected_piece.board_pos
+			if not is_legal_pos(move_pos):
+				continue
+			
+			if is_occupied_by_piece_of(move_pos, selected_piece.player):
+				continue
+
+			spawn_legal_movement_move(move_pos)
 
 func spawn_legal_movement_move(pos: Vector2i):
 	var arrow_marker: MoveMarker = move_marker_scn.instantiate()
@@ -168,3 +191,12 @@ func board2world(pos: Vector2i) -> Vector2:
 func board2world3(pos: Vector2i) -> Vector3:
 	var p := board2world(pos)
 	return Vector3(p.x, 1.0, p.y)
+	
+func is_occupied_by_piece_of(pos: Vector2i, player: Piece.Player) -> bool:
+	var piece_at = find_piece_at(pos)
+	if not piece_at:
+		return false
+	return piece_at.player == player
+
+func is_legal_pos(pos: Vector2i) -> bool:
+	return pos.x >= 0 and pos.x < 8 and pos.y >= 0 and pos.y < 8

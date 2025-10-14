@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bd5bff3aockur"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bd5bff3aockur"]
 
 [ext_resource type="FontFile" uid="uid://c7hd5o38jyyvc" path="res://assets/fonts/Jacquard12-Regular.ttf" id="1_e1x85"]
+[ext_resource type="FontFile" uid="uid://bsh2vl74n5exu" path="res://assets/fonts/Jacquard24-Regular.ttf" id="2_cjfk0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvh5c"]
 content_margin_left = 4.0
@@ -72,7 +73,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [resource]
-default_font = ExtResource("1_e1x85")
+default_font = ExtResource("2_cjfk0")
 default_font_size = 32
 All/font_sizes/FontSize = 32
 All/fonts/Font = ExtResource("1_e1x85")
@@ -94,7 +95,7 @@ Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/font_sizes/font_size = 64
-Button/fonts/font = ExtResource("1_e1x85")
+Button/fonts/font = ExtResource("2_cjfk0")
 Button/styles/disabled = SubResource("StyleBoxFlat_vvh5c")
 Button/styles/focus = SubResource("StyleBoxFlat_28aoi")
 Button/styles/hover = SubResource("StyleBoxFlat_jnlp7")

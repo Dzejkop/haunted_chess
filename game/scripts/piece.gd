@@ -22,7 +22,12 @@ enum Player {
 }
 
 const KIND_NAME: Dictionary = {
-	Kind.PAWN: "Pawn"
+	Kind.PAWN: "Pawn",
+	Kind.KING: "King",
+	Kind.QUEEN: "Queen",
+	Kind.ROOK: "Rook",
+	Kind.KNIGHT: "Knight",
+	Kind.TOWER: "Tower"
 }
 
 @export

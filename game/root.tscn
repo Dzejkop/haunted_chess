@@ -4,14 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://dpgsddkebjyau" path="res://pieces/pawn.tscn" id="2_tw3kd"]
 [ext_resource type="PackedScene" uid="uid://c4w8vuna37lkx" path="res://assets/board.glb" id="3_gd4vy"]
 [ext_resource type="PackedScene" uid="uid://5xkx5ht73y67" path="res://move_marker.tscn" id="3_huihk"]
+[ext_resource type="PackedScene" uid="uid://bumvlb03j84me" path="res://pieces/king.tscn" id="3_tw3kd"]
 [ext_resource type="Script" uid="uid://ryo7pp6ayx2w" path="res://scripts/camera_dolly.gd" id="4_qw60f"]
 [ext_resource type="Theme" uid="uid://bd5bff3aockur" path="res://theme.tres" id="5_eji0w"]
 [ext_resource type="Script" uid="uid://ob0ao55rm8qa" path="res://scripts/menu.gd" id="6_qwhpj"]
-[ext_resource type="FontFile" uid="uid://c7hd5o38jyyvc" path="res://assets/fonts/Jacquard12-Regular.ttf" id="7_qt76e"]
 [ext_resource type="Texture2D" uid="uid://c54cwvbw53kw1" path="res://assets/flames.png" id="8_sq7yr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_28aoi"]
-font = ExtResource("7_qt76e")
 font_size = 160
 
 [sub_resource type="Animation" id="Animation_bf3um"]
@@ -117,7 +116,8 @@ overlay_panel = NodePath("OverlayUI/Panel")
 pieces_container = NodePath("AllPieces")
 highlighter = NodePath("PieceHighlight")
 piece_scenes = Dictionary[int, PackedScene]({
-0: ExtResource("2_tw3kd")
+0: ExtResource("2_tw3kd"),
+1: ExtResource("3_tw3kd")
 })
 move_marker_scn = ExtResource("3_huihk")
 
@@ -241,17 +241,17 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="vsCpu" type="Button" parent="MainMenuUi/VBoxContainer"]
-layout_mode = 2
-text = "vs CPU"
-
 [node name="MatchMaking" type="Button" parent="MainMenuUi/VBoxContainer"]
 layout_mode = 2
-text = "Match Making"
+text = "Play"
 
 [node name="InviteOpponent" type="Button" parent="MainMenuUi/VBoxContainer"]
 layout_mode = 2
-text = "Invite Opponent"
+text = "Invite"
+
+[node name="vsCpu" type="Button" parent="MainMenuUi/VBoxContainer"]
+layout_mode = 2
+text = "vs CPU"
 
 [node name="Control" type="MarginContainer" parent="MainMenuUi"]
 layout_mode = 1
@@ -286,6 +286,7 @@ offset_left = -162.0
 offset_top = -33.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("5_eji0w")
 text = "made by chicory.games"
 uri = "https://chicory.games"
 
