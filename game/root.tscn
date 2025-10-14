@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://6qvhtwrmq5xn"]
+[gd_scene load_steps=26 format=3 uid="uid://6qvhtwrmq5xn"]
 
 [ext_resource type="Script" uid="uid://bxhdr4n27yc02" path="res://scripts/root.gd" id="1_huihk"]
 [ext_resource type="PackedScene" uid="uid://dpgsddkebjyau" path="res://pieces/pawn.tscn" id="2_tw3kd"]
@@ -13,6 +13,11 @@
 [ext_resource type="Script" uid="uid://ob0ao55rm8qa" path="res://scripts/menu.gd" id="6_qwhpj"]
 [ext_resource type="PackedScene" uid="uid://pxu1di6e3lb0" path="res://pieces/tower.tscn" id="7_sq7yr"]
 [ext_resource type="Texture2D" uid="uid://c54cwvbw53kw1" path="res://assets/flames.png" id="8_sq7yr"]
+[ext_resource type="Shader" uid="uid://boprqobnnjayk" path="res://shaders/effects.gdshader" id="14_qwhpj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qt76e"]
+shader = ExtResource("14_qwhpj")
+shader_parameter/size = Vector2(4, 3)
 
 [sub_resource type="LabelSettings" id="LabelSettings_28aoi"]
 font_size = 160
@@ -55,12 +60,10 @@ _data = {
 }
 
 [sub_resource type="Environment" id="Environment_h78s3"]
-background_energy_multiplier = 0.0
-ambient_light_energy = 0.0
+ambient_light_color = Color(1, 1, 1, 1)
 glow_enabled = true
 glow_bloom = 1.0
 glow_hdr_threshold = 0.68
-fog_light_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_f0fmn"]
 length = 0.001
@@ -151,6 +154,18 @@ fov = 30.0
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.392191, 0)
 omni_range = 12.717258
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_qt76e")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="OverlayUI" type="Control" parent="."]
 layout_mode = 3
