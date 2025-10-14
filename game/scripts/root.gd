@@ -136,7 +136,7 @@ func pick_a_piece():
 	var result = space_state.intersect_ray(query)
 
 	if not result.is_empty():
-		if result.collider is Piece:
+		if result.collider is Piece and result.collider.player == local_player:
 			overlay_panel.visible = true
 			var label: Label = overlay_panel.get_node("VBoxContainer/Text")
 			label.text = str(result.position)
@@ -155,9 +155,7 @@ func pick_a_piece():
 
 			if Input.is_action_just_released("move"):
 				execute_move(result.collider)
-		else:
-			print("unknown item")
-			
+
 func execute_move(marker: MoveMarker):
 	turn_counter += 1
 	selected_piece.num_moves += 1
@@ -233,6 +231,8 @@ func spawn_legal_queen_moves():
 			if is_occupied_by_piece_of(move_pos, selected_piece.player):
 				break
 			spawn_legal_movement_move(move_pos)
+			if is_occupied_by_piece_of(move_pos, selected_piece.other_player()):
+				break
 
 func spawn_legal_tower_moves():
 	var all_dirs = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
@@ -244,7 +244,11 @@ func spawn_legal_tower_moves():
 				break
 			if is_occupied_by_piece_of(move_pos, selected_piece.player):
 				break
+
 			spawn_legal_movement_move(move_pos)
+
+			if is_occupied_by_piece_of(move_pos, selected_piece.other_player()):
+				break
 
 func spawn_legal_knight_moves():
 	var all_dirs = [
@@ -282,6 +286,8 @@ func spawn_legal_rook_moves():
 			if is_occupied_by_piece_of(move_pos, selected_piece.player):
 				break
 			spawn_legal_movement_move(move_pos)
+			if is_occupied_by_piece_of(move_pos, selected_piece.other_player()):
+				break
 
 func spawn_legal_movement_move(pos: Vector2i):
 	var arrow_marker: MoveMarker = move_marker_scn.instantiate()

@@ -39,7 +39,7 @@ var board_pos: Vector2i = Vector2i.ZERO
 ## How many times this piece moves
 var num_moves: int = 0
 
-var player
+var player: Player
 
 func init(player_value: Player, board_pos_value: Vector2i):
 	self.player = player_value
@@ -59,3 +59,9 @@ func get_legal_moves():
 
 func get_pawn_legal_moves():
 	pass
+	
+func other_player():
+	if player == Player.White:
+		return Player.Black
+	else:
+		return Player.White
